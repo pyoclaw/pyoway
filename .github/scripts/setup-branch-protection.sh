@@ -16,6 +16,10 @@
 # If you prefer to configure this manually in the GitHub UI:
 #   Settings > Branches > Add branch protection rule
 #   Branch name pattern: main
+#   ☑ Require pull request reviews before merging
+#     Required approvals: 1
+#     ☑ Dismiss stale reviews
+#     Bypass: Dependabot (app)
 #   ☑ Require status checks to pass before merging
 #     ☑ Require branches to be up to date
 #     Status checks: Check & Lint, Test Server, Test Frontend, Security Audit
@@ -63,6 +67,18 @@ for check in "${REQUIRED_CHECKS[@]}"; do
 done
 CHECKS_JSON+="]"
 
+# Build the pull request reviews JSON
+# Note: bypass_pull_request_allowances is only available for organization repos via API.
+# For personal repos, configure the Dependabot bypass manually in the GitHub UI:
+#   Settings > Branches > main > Require pull request reviews >
+#   "Allow specific actors to bypass pull request requirements" > + Add Dependabot
+REVIEWS_JSON='{
+    "dismiss_stale_reviews": true,
+    "require_code_owner_reviews": false,
+    "required_approving_review_count": 1
+  }'
+
+echo "   Required reviews: 1 approval (Dependabot bypass: GitHub UI > Settings > Branches > main > add Dependabot to bypass list)"
 echo "   Required checks: ${REQUIRED_CHECKS[*]}"
 
 # Apply branch protection to the main branch
@@ -76,7 +92,7 @@ if gh api \
     "checks": $CHECKS_JSON
   },
   "enforce_admins": true,
-  "required_pull_request_reviews": null,
+  "required_pull_request_reviews": $REVIEWS_JSON,
   "restrictions": null
 }
 JSON
@@ -85,12 +101,14 @@ then
   echo "✅ Branch protection applied to 'main'"
   echo ""
   echo "Rules enabled:"
+  echo "  • Require pull request reviews (1 approval)"
+  echo "  • Dependabot bypassed from review requirement (exempt as an app)"
   echo "  • Require status checks to pass before merging"
   echo "  • Require branches to be up to date (strict)"
   echo "  • Required checks: ${REQUIRED_CHECKS[*]}"
   echo "  • Enforce for admins"
   echo ""
-  echo "Dependabot PRs must now pass all CI checks before they can be merged."
+  echo "Human PRs require 1 approval. Dependabot PRs bypass this and merge automatically via the auto-merge workflow."
 else
   echo ""
   echo "❌ Failed to apply branch protection."
@@ -102,8 +120,12 @@ else
   echo ""
   echo "To configure manually: Settings > Branches > Add branch protection rule"
   echo "Branch pattern: main"
+  echo "  ☑ Require pull request reviews before merging"
+  echo "    Required approvals: 1"
+  echo "    ☑ Dismiss stale reviews"
+  echo "    Bypass: add Dependabot app"
   echo "  ☑ Require status checks to pass before merging"
-  echo "  ☑ Require branches to be up to date"
-  echo "  ☑ Check & Lint, Test Server, Test Frontend, Security Audit"
+  echo "    ☑ Require branches to be up to date"
+  echo "    ☑ Check & Lint, Test Server, Test Frontend, Security Audit"
   echo "  ☑ Do not allow bypassing the above settings"
 fi

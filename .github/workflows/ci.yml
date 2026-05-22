@@ -8,6 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_TOOLCHAIN: "1.95.0"
   RUSTFLAGS: "-D unsafe_code -W clippy::pedantic -W clippy::cargo -W clippy::nursery -A clippy::multiple_crate_versions -A clippy::must_use_candidate"
 
 jobs:
@@ -20,9 +21,12 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          toolchain: "1.95.0"
+          toolchain: "${{ env.RUST_TOOLCHAIN }}"
           components: clippy, rustfmt
           targets: wasm32-unknown-unknown
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Format check
         run: cargo fmt --check --all
@@ -42,7 +46,10 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          toolchain: "1.95.0"
+          toolchain: "${{ env.RUST_TOOLCHAIN }}"
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Run landing-server tests
         run: cargo test -p landing-server
@@ -56,8 +63,11 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          toolchain: "1.95.0"
+          toolchain: "${{ env.RUST_TOOLCHAIN }}"
           targets: wasm32-unknown-unknown
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Run landing-frontend tests
         run: cargo test -p landing-frontend
@@ -71,7 +81,10 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          toolchain: "1.95.0"
+          toolchain: "${{ env.RUST_TOOLCHAIN }}"
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Install cargo-deny
         run: cargo install cargo-deny cargo-audit cargo-machete

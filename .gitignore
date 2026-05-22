@@ -10,7 +10,6 @@ docs/book/
 
 # Node
 node_modules/
-package.json
 
 # IDE
 .idea/
