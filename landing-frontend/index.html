@@ -57,6 +57,9 @@
     <!-- App mount point -->
     <div id="app"></div>
 
+    <!-- Trunk: build the WASM binary -->
+    <link data-trunk rel="rust" data-bin="landing-frontend" data-wasm-opt="0" />
+
     <!-- WASM bundle -->
     <script type="module">
         import init from '/pkg/landing_frontend.js';
