@@ -18,5 +18,5 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 leptos = { version = "0.7", default-features = true }
 leptos_meta = "0.7"
-leptos_router = "0.7"
+leptos_router = "0.8"
 console_error_panic_hook = "0.1"
