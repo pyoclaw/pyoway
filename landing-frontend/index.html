@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pyoway — Personal website and knowledge base built with Rust" />
+    <title>Pyoway</title>
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        /* Loading state shown while WASM loads */
+        #loading-splash {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0f;
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        #loading-splash.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading splash -->
+    <div id="loading-splash">
+        <div class="loader"></div>
+        <p style="color: #94a3b8; font-size: 0.875rem;">Loading Pyoway...</p>
+    </div>
+
+    <!-- App mount point -->
+    <div id="app"></div>
+
+    <!-- WASM bundle -->
+    <script type="module">
+        import init from '/pkg/landing_frontend.js';
+        init().then(() => {
+            document.getElementById('loading-splash').classList.add('hidden');
+        }).catch(err => {
+            console.error('Failed to initialize WASM:', err);
+            document.getElementById('loading-splash').innerHTML = `
+                <p style="color: #ef4444;">Failed to load application.</p>
+                <p style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.5rem;">Please try refreshing the page.</p>
+            `;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* Pyoway custom mdBook theme */
+/* Overrides the default mdBook theme to match the landing page aesthetic */
+
+:root {
+    --bg: #0a0a0f;
+    --fg: #f8fafc;
+    --sidebar-bg: #12121a;
+    --sidebar-fg: #94a3b8;
+    --sidebar-active: #3b82f6;
+    --sidebar-hover: #f8fafc;
+    --links: #3b82f6;
+    --links-hover: #8b5cf6;
+    --scrollbar: #1e293b;
+    --border: #1e293b;
+    --code-bg: #12121a;
+    --quote-bg: #12121a;
+    --quote-border: #3b82f6;
+    --search-input-bg: #12121a;
+    --search-input-border: #1e293b;
+    --search-result-bg: #12121a;
+    --search-result-hover: #1e293b;
+    --search-result-fg: #f8fafc;
+    --search-result-highlight: #3b82f6;
+    --search-mark-highlight: #3b82f6;
+    --search-mark-fg: #f8fafc;
+    --menu-hover-bg: #1e293b;
+    --menu-hover-fg: #f8fafc;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+code, pre {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+a {
+    color: var(--links);
+}
+
+a:hover {
+    color: var(--links-hover);
+}
+
+/* Sidebar */
+.sidebar {
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+}
+
+.sidebar .chapter li a.active {
+    color: var(--sidebar-active);
+    border-left: 2px solid var(--sidebar-active);
+}
+
+.sidebar .chapter li a:hover {
+    color: var(--sidebar-hover);
+}
+
+/* Search */
+#searchbar {
+    background: var(--search-input-bg);
+    border: 1px solid var(--search-input-border);
+    color: var(--fg);
+}
+
+/* Code blocks */
+pre, .code {
+    background: var(--code-bg) !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+/* Blockquotes */
+blockquote {
+    background: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Page navigation */
+.nav-chapters {
+    color: var(--sidebar-fg);
+}
+
+.nav-chapters:hover {
+    color: var(--links);
+}
+
+/* Buttons */
+button, .btn {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    color: var(--fg);
+}
+
+button:hover, .btn:hover {
+    background: var(--menu-hover-bg);
+    color: var(--menu-hover-fg);
+}

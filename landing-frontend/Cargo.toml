@@ -1,0 +1,23 @@
+[package]
+name = "landing-frontend"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Leptos WASM frontend for the Pyoway landing page"
+repository = "https://github.com/pyoclaw/pyoway"
+readme = "README.md"
+keywords = ["leptos", "wasm", "webassembly", "frontend"]
+categories = ["wasm", "web-programming::frontend"]
+
+[lints]
+workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+leptos = { version = "0.7", default-features = true }
+leptos_meta = "0.7"
+leptos_router = "0.7"
+wasm-bindgen = "0.2"
+console_error_panic_hook = "0.1"

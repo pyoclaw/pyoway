@@ -1,0 +1,8 @@
+[build]
+target = "index.html"
+output = "dist"
+public_url = "/"
+
+[hooks]
+on_build = "npm run tailwind"
+on_success = "echo 'Build complete!'"

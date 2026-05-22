@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = ["landing-server", "landing-frontend"]
+
+[workspace.package]
+version = "0.1.0"
+license = "MIT"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_docs = "deny"
+rust_2024_compatibility = "deny"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+cargo = { level = "warn", priority = -1 }
+unwrap_used = "warn"
+expect_used = "warn"
+missing_docs_in_private_items = "deny"
+missing_errors_doc = "deny"
+must_use_candidate = "warn"

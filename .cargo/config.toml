@@ -1,0 +1,11 @@
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-D", "unsafe_code", "-W", "clippy::pedantic", "-W", "clippy::cargo", "-W", "clippy::nursery"]
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+strip = "symbols"

@@ -1,0 +1,36 @@
+{
+    // Rust-specific
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.check.extraArgs": ["--", "-D", "warnings"],
+    "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.procMacro.attributes.enable": true,
+    "rust-analyzer.completions.addCallParenthesis": true,
+    "rust-analyzer.completions.addCallArgumentSnippets": true,
+    "rust-analyzer.imports.granularity.group": "module",
+    "rust-analyzer.rustfmt.extraArgs": ["+stable"],
+    "rust-analyzer.semanticHighlighting.enable": true,
+    "rust-analyzer.callInfo.full": true,
+    "rust-analyzer.linkedProjects": ["Cargo.toml"],
+    "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+    "rust-analyzer.inlayHints.chainingHints.enable": true,
+    "rust-analyzer.inlayHints.parameterHints.enable": true,
+    "rust-analyzer.inlayHints.typeHints.enable": true,
+    "rust-analyzer.inlayHints.closingBraceHints.enable": true,
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "always",
+    "rust-analyzer.inlayHints.maxLength": 120,
+
+    // TOML
+    "evenBetterToml.formatter.alignEntries": true,
+    "evenBetterToml.formatter.reorderKeys": true,
+
+    // General
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.rulers": [100],
+
+    // Spell check
+    "cSpell.words": ["Pyoway", "Axum", "Leptos", "Tailwind", "mdBook", "Tokio", "Serde", "dotenvy"]
+}

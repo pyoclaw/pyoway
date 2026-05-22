@@ -1,0 +1,14 @@
+[book]
+title = "Pyoway Knowledge Base"
+authors = ["pyoclaw"]
+language = "en"
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/pyoclaw/pyoway"
+edit-url-template = "https://github.com/pyoclaw/pyoway/edit/main/docs/{path}"
+
+[output.html.search]
+enable = true
+

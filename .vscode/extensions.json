@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "bradlc.magic-tailwindcss",
+        "vadimcn.vscode-lldb",
+        "fill-labs.dependi",
+        "github.vscode-github-actions",
+        "streetsidesoftware.code-spell-checker"
+    ]
+}

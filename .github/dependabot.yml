@@ -1,0 +1,67 @@
+# Dependabot configuration for Pyoway
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    # Crates that should not be auto-updated
+    # - wasm-bindgen: must stay in sync with wasm-bindgen-cli used by Trunk
+    #   Add other pinned deps here (e.g., toolchain-specific crates)
+    ignore:
+      # Wildcard catches wasm-bindgen + all sub-crates (futures, macro, shared)
+      - dependency-name: "wasm-bindgen*"
+        update-types:
+          - "version-update:semver-patch"
+          - "version-update:semver-minor"
+          - "version-update:semver-major"
+
+    # Group non-breaking updates together to reduce PR noise
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Open at most 3 PRs at a time (1 major group + up to 2 stragglers)
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "rust"
+    # Allow Dependabot to rebase and force-push to its own PR branches
+    rebase-strategy: "auto"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+
+  # Keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    groups:
+      actions-minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "ci"
+    commit-message:
+      prefix: "chore"
+      include: "scope"

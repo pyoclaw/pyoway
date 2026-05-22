@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D unsafe_code -W clippy::pedantic -W clippy::cargo -W clippy::nursery -A clippy::multiple_crate_versions -A clippy::must_use_candidate"
+
+jobs:
+  check:
+    name: Check & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: "1.95.0"
+          components: clippy, rustfmt
+          targets: wasm32-unknown-unknown
+
+      - name: Format check
+        run: cargo fmt --check --all
+
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Check
+        run: cargo check --workspace
+
+  test-server:
+    name: Test Server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: "1.95.0"
+
+      - name: Run landing-server tests
+        run: cargo test -p landing-server
+
+  test-frontend:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: "1.95.0"
+          targets: wasm32-unknown-unknown
+
+      - name: Run landing-frontend tests
+        run: cargo test -p landing-frontend
+
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: "1.95.0"
+
+      - name: Install cargo-deny
+        run: cargo install cargo-deny cargo-audit cargo-machete
+
+      - name: Cargo Deny
+        run: cargo deny check
+
+      - name: Cargo Audit
+        run: cargo audit
+
+      - name: Cargo Machete
+        run: cargo machete

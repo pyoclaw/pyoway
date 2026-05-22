@@ -1,0 +1,16 @@
+[advisories]
+unmaintained = "workspace"
+yanked = "deny"
+
+[licenses]
+allow = ["MIT", "Apache-2.0", "BSD-3-Clause", "BSL-1.0", "Unicode-3.0", "Zlib"]
+
+[bans]
+multiple-versions = "deny"
+skip = [
+  { name = "convert_case", allow-registry = ["*"], reason = "two versions pulled in by different proc-macro crates" },
+  { name = "hashbrown", allow-registry = ["*"], reason = "two versions pulled in by hashbrown 0.14 itself vs hashbrown 0.17 for newer rustc-hash" },
+  { name = "thiserror", allow-registry = ["*"], reason = "thiserror 1.x and 2.x used by different dependencies" },
+  { name = "thiserror-impl", allow-registry = ["*"], reason = "thiserror 1.x and 2.x used by different dependencies" },
+  { name = "wit-bindgen", allow-registry = ["*"], reason = "multiple versions pulled in by wasmtime and related crates" },
+]

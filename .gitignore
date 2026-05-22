@@ -1,0 +1,30 @@
+# Rust
+target/
+Cargo.lock
+
+# WASM
+landing-frontend/dist/
+
+# mdBook
+docs/book/
+
+# Node
+node_modules/
+package.json
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# VS Code (except shared configs)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Env
+.env
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,2 @@
+doc-valid-idents = ["Pyoway", "Leptos", "Axum", "WASM", "mdBook"]
+allowed-duplicate-crates = ["syn", "quote", "proc-macro2"]
