@@ -1,0 +1,46 @@
+# Auto-label PRs based on changed paths
+# See https://github.com/actions/labeler
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file: docs/**
+
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: landing-frontend/**
+
+server:
+  - changed-files:
+      - any-glob-to-any-file: landing-server/**
+
+ci/cd:
+  - changed-files:
+      - any-glob-to-any-file: .github/**
+
+infrastructure:
+  - changed-files:
+      - any-glob-to-any-file:
+          - Dockerfile
+          - docker-compose.yml
+          - .dockerignore
+          - .cargo/config.toml
+          - rust-toolchain.toml
+          - deny.toml
+          - Justfile
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - SECURITY.md
+          - CONTRIBUTING.md
+          - LICENSE
+
+# Root-level configuration and metadata
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - Cargo.toml
+          - Cargo.lock
+          - landing-frontend/Cargo.toml
+          - landing-server/Cargo.toml
