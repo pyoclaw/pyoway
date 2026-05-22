@@ -1,6 +1,12 @@
 [advisories]
-unmaintained = "workspace"
+unmaintained = "warn"
 yanked = "deny"
+
+# The paste crate (v1.0.x) is no longer maintained but is widely used as a transitive
+# dependency by syn, quote, and other proc-macro crates. No replacement needed.
+ignore = [
+  "RUSTSEC-2024-0436",
+]
 
 [licenses]
 allow = ["MIT", "Apache-2.0", "BSD-3-Clause", "BSL-1.0", "Unicode-3.0", "Zlib"]

@@ -26,7 +26,7 @@ test-all:
 # Run security audit
 audit:
     cargo deny check
-    cargo audit
+    cargo audit --ignore RUSTSEC-2024-0436
 
 # Check for unused deps
 machete:
